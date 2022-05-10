@@ -184,6 +184,11 @@ hist(diabetes$time_in_hospital,
 ```
 
 ```{r}
+library(funModeling)
+plot_num(diabetes[c(1:2000),c(6:18)])
+```
+
+```{r}
 library(dataMaid)
 makeDataReport(diabetes)
 ```
@@ -253,6 +258,13 @@ outlier_ind
 outlier <- data.frame(diabetes[outlier_ind, ])
 ```
 
+```{r}
+library(dlookr)
+dlookr::diagnose_outlier(diabetes[,c(13:14)])
+plot_outlier(diabetes[,c(13:14)])
+```
+
+
 #Analyzing categorical variables in R
 
 #Notice how R knows how to summarize each variable. If it’s categorical, it just lists the frequencies of
@@ -264,6 +276,11 @@ each category (we call that a frequency table, displaying the distribution of th
 #subsetting data using matrix property []
 ```{r}
 d <- subset(diabetes[,c("race","gender","payer_code")])
+```
+
+```{r}
+library(inspectdf)
+show_plot(inspect_cat(d))
 ```
 
 #summarizing a categorical variable using summary function - no information
