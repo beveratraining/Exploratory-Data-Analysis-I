@@ -1,0 +1,72 @@
+---
+title: "Frequency Tables"
+author: "EDA 1"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# import treatment dataset
+```{r}
+#chi<-read.csv(file.choose()) #default
+chi<- read.table("drug_treatment_chisquare.csv", header=TRUE, sep=',')
+#chi<- read.csv("drug_treatment_chisquare.csv")
+```
+
+# using basic functions to explore dataset
+```{r}
+View(chi)
+head(chi)
+str(chi)
+```
+
+# converting 'id' variable to character
+```{r}
+chi$id<-as.character(chi$id) 
+str(chi)
+```
+
+# factor in R
+```{r}
+chi$treatment <- factor(chi$treatment) #write over the existing variable
+str(chi)
+```
+
+# summary statistics on a categorical
+```{r}
+library(psych)
+psych::describe(chi[,2:4]) 
+#this function on the categorical does not provice useful information on the categorical variable
+```
+
+# using describe function from another package is useful
+```{r}
+library(Hmisc)
+Hmisc::describe(chi[,2:4])
+```
+
+# univariate categorical analysis
+# creating a frequency table in R
+```{r}
+table(chi$treatment)
+```
+
+```{r}
+#install.packages('epiDisplay')
+library(epiDisplay)
+tab1(chi$treatment, sort.group = "decreasing", cum.percent = TRUE)
+```
+
+# bivariate categorical analysis
+```{r}
+#install.packages("gmodels")
+library("gmodels")
+# CrossTable in R
+CrossTable(chi$treatment, chi$improvement, prop.t=TRUE, prop.r=FALSE, prop.c=FALSE)
+#can turn options on and off
+
+CrossTable(chi$treatment, chi$improvement, chisq = TRUE, format='SAS') #can also use a SPSS format
+```
+
+
