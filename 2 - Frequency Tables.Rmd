@@ -36,14 +36,14 @@ str(chi)
 # summary statistics on a categorical
 ```{r}
 library(psych)
-psych::describe(chi[,2:4]) 
-#this function on the categorical does not provice useful information on the categorical variable
+psych::describe(chi[,2:3]) 
+#this function on the categorical does not provide useful information on the categorical variable
 ```
 
 # using describe function from another package is useful
 ```{r}
 library(Hmisc)
-Hmisc::describe(chi[,2:4])
+Hmisc::describe(chi[,2:3])
 ```
 
 # univariate categorical analysis
@@ -63,10 +63,10 @@ tab1(chi$treatment, sort.group = "decreasing", cum.percent = TRUE)
 #install.packages("gmodels")
 library("gmodels")
 # CrossTable in R
-CrossTable(chi$treatment, chi$improvement, prop.t=TRUE, prop.r=FALSE, prop.c=FALSE)
+CrossTable(chi$treatment, chi$improvement, prop.t=TRUE, prop.r=TRUE, prop.c=TRUE)
 #can turn options on and off
 
-CrossTable(chi$treatment, chi$improvement, chisq = TRUE, format='SAS') #can also use a SPSS format
+CrossTable(chi$treatment, chi$improvement, chisq = TRUE, format='SPSS') #can also use a SPSS format
 ```
 
 

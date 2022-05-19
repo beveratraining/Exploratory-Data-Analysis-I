@@ -46,7 +46,7 @@ results=hide: The code chunk will be evaluated but the results or the code will 
 Multiple code chunk options can be used for the same chunk.
 
 ```{r output_pdf}
-# Open pfd file
+# Open pdf file
 # Customizing the output
 pdf("my_plot.pdf",         # File name
     width = 8, height = 7, # Width/height in inch 
@@ -91,7 +91,7 @@ y2  <- 2*y1
 plot(x, y1, type = "S")
 # Show both points and line
 plot(x, y1, type = "b", pch = 19, 
-     col = "red", xlab = "x", ylab = "y")
+     col = "#7570b3", xlab = "x", ylab = "y", main="x vs y1")
 ```
 
 ```{r}
@@ -102,17 +102,18 @@ colors() #list of colors in RStudio
 ```{r}
 # Create a first line
 plot(x, y1, type = "b", frame = FALSE, pch = 19, 
-     col = "red", xlab = "x", ylab = "y", ylim = c(0,200)) #changing the y-axis limits, 0-200
+     col = "red", xlab = "x", ylab = "y", ylim = c(0,100)) #changing the y-axis limits, 0-200
 
 # Add a second line
-lines(x, y2, pch = 18, col = "blue", type = "b", lty = 2)
+lines(x, y2, pch = 18, col = "blue", type = "b", lty = 2) #xlim = seq(0,10,3))
 
 # Add a legend to the plot
-legend("topleft", legend=c("Line 1", "Line 2"),
+legend(1,50, legend=c("Line 1", "Line 2"),
        col=c("red", "blue"), lty = 1:2, cex=0.8)
 ```
 
 ```{r barplot}
+data()
 data("VADeaths")
 View(VADeaths)
 str(VADeaths)
@@ -124,7 +125,7 @@ x
 # Bar plot of one variable
 barplot(x)
 # Horizontal bar plot
-barplot(x, horiz = TRUE, cex.names = .9)
+barplot(x, horiz = TRUE, cex.names = .8, cex.axis = .7)
 x
 ```
 
@@ -154,7 +155,7 @@ barplot(x, col = c("#999999", "#E69F00", "#56B4E9"))
 
 #Your Turn
 #add in the main title "Death Rates in Virginia'. Add an x-axis label, Age
-barplot(x, ylab = "Rate", cex.axis = .9)
+barplot(x, main="Death Rates in Virginia" , xlab="Age", ylab = "Rate", cex.axis = .9)
 
 #Stacked bar plots
 
@@ -175,12 +176,12 @@ barplot(VADeaths,
 # Define a set of colors
 #Your Turn
 #Create a vector of 5 colors
-my_colors <- 
+my_colors <- c("blue", "red", "yellow", "green", "orange")
   
 # Bar plot
 barplot(VADeaths, col = my_colors, beside = TRUE)
 # Add legend
-legend("topleft", legend = rownames(VADeaths), 
+legend("topright",legend = rownames(VADeaths), 
        fill = my_colors, box.lty = 0, cex = 0.8)
 
 #box.lty = 0: Remove the box around the legend
@@ -278,9 +279,7 @@ boxplot2(len ~ dose, data = ToothGrowth,
 
 # Put the annotation at the top
 boxplot2(len ~ dose, data = ToothGrowth,
-         frame = FALSE, top = TRUE)
-
-
+         frame = FALSE, top = TRUE, shrink=0.8, textcolor="red")
 ```
 
 
@@ -336,7 +335,7 @@ hist(Temperature, breaks=c(50,55,60,65,70,75,80,85,90,95,100), main="With breaks
 
 #Your Turn
 #Create breaks = a sequence of values from 50-100 by 10
-hist(Temperature, breaks=  , main="With breaks=5")
+hist(Temperature, breaks=seq(50,100,10), main="With breaks=5")
 
 #Histogram with non-uniform width
 hist(Temperature,
@@ -380,8 +379,8 @@ y <- cancer$positive_nodes_detected
 # Plot with main and axis titles
 # Change point shape (pch = 19) and remove frame.
 plot(x, y, main = "Main title",
-     xlab = "X axis title", ylab = "Y axis title",
-     pch = 19, frame = FALSE)
+     xlab = "age", ylab = "Positive nodes detected",
+     pch = 17, frame = FALSE)
 # Add regression line
 plot(x, y, main = "Positive Nodes Detected by Age", xlab = "X axis title", ylab = "Y axis title", pch = 19, frame = FALSE)
 abline(lm(y ~ x, data = cancer), col = "blue")
@@ -494,7 +493,7 @@ z <- pd$MDVP.Flo.Hz.
 grps <- as.factor(pd$status)
 
 # Plot
-install.packages("scatterplot3d")
+#install.packages("scatterplot3d")
 library(scatterplot3d)
 scatterplot3d(x, y, z, pch = 16)
 

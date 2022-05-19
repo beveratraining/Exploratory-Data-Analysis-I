@@ -189,7 +189,7 @@ plot_num(diabetes[c(1:2000),c(6:18)])
 
 ```{r}
 library(dataMaid)
-makeDataReport(diabetes)
+makeDataReport(diabetes[,c(6:18)])
 ```
 
 #Univariate Group Statistics (Quant vs. Qual)
@@ -226,7 +226,7 @@ summary(diabetes$num_medications)
 boxplot(diabetes$num_medications,
   ylab = "Number of Medications"
 )
-mtext(paste("Outliers: ", paste(out, collapse = ", ")))
+
 #extract the values of the potential outliers based on the IQR criterion
 ```
 
@@ -401,14 +401,14 @@ barplot(table3)
 #cross tabulations of 2 variables
 ```{r}
 library(crosstable)
-crosstable(diabetes, c(gender, age), by=diabetesMed) %>%
+crosstable(diabetes, c(gender, age), by=diabetesMed) %>% #then
   as_flextable(keep_id=TRUE)
 ```
 
 #insights from performing independence tests on contingency tables
 ```{r}
 library(gmodels)
-t2<-CrossTable(diabetes$diabetesMed,diabetes$readmitted,chisq=TRUE)
+t2<-CrossTable(diabetes$diabetesMed,diabetes$readmitted,chisq=TRUE, format="SAS")
 
 t2$prop.tbl
 ```
@@ -429,7 +429,7 @@ pairs.panels(diabetes[c("gender", "admission_type_id", "num_procedures")])
 ```{r}
 diabetes$diabetesMed <- factor(diabetes$diabetesMed)
 library(DataExplorer)
-create_report(diabetes[,c(3:15,48,49)],
+create_report(diabetes[,c(3:18,48,49)],
 y="diabetesMed")
 ```
 

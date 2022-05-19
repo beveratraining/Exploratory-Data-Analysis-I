@@ -11,7 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 #Set working directory either using point-clink method or programming setwd()
 ```{r}
 getwd()
-#setwd()
+#("C:/Users/redbe/OneDrive/Documents/Data")
+#setwd("~/Data")
 ```
 
 #import data
@@ -45,10 +46,10 @@ tail(pd) #last 6 rows
 #reviewing label names in the dataset
 names(pd)
 ```
-
 ```{r}
 #structure
 str(pd)
+
 ```
 
 ```{r}
