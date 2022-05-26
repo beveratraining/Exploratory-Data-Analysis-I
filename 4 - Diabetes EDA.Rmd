@@ -1,8 +1,8 @@
 ---
-title: "Health disparities in diabetes, treatments""
+title: "Health disparities in diabetes, treatments"
 author: "Y Phillips"
 date: "3/24/2022"
-output: pdf document
+output: html_document
 ---
 
 #articles:
@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(magrittr) #uses the pipe operator, %>% 
 options(scipen=999,digits=3) #scientific notation
+library(dplyr) #glimpse function
 ```
 
 import data
@@ -131,6 +132,7 @@ How many variables does my dataset have and what are their types?
 identify which variables should be factors? character? numeric?
 ```{r}
 str(diabetes)
+library(dplyr)
 glimpse(diabetes)
 ```
 
@@ -189,7 +191,7 @@ plot_num(diabetes[c(1:2000),c(6:18)])
 
 ```{r}
 library(dataMaid)
-makeDataReport(diabetes[,c(6:18)])
+makeDataReport(diabetes[,c(6:15)])
 ```
 
 #Univariate Group Statistics (Quant vs. Qual)
